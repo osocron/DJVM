@@ -1,0 +1,23 @@
+This is the Magi's Theater Company. The mos magical theater company in the world!
+
+At the company we have writers that create magnificent plays under the brilliant direction of the Dramaturg.
+Once a play is finished, which takes some time, the Dramaturg notifies the director and the director begins
+rehearsing with the actors.
+Magi's Theater Company has some of the best actors in the industry, so it usually it doesn't take long
+for them to be ready for performing in front of an audience.
+While they rehearse, the actors must memorize their lines and deliver them in order. Also, the director
+gives them instructions as to what kind of emotional responses they have to deliver while interpreting
+their lines.
+Once in a while, an Actor gets sick and cannot perform, in those cases, an Understudy must take its place.
+The Director chooses who will be the replacement.
+Once rehearsal is over the Director sets up the grand opening where lots of people
+come to enjoy another masterpiece!
+
+- Writers create a Play collectively under the direction of a Dramaturg.
+- Writers notify the Director once the Play is finished.
+- Director instructs the Actors to do a rehearsal.
+- When an Actor gets sick the Director chooses an appropriate replacement.
+- An Actor memorizes their lines.
+- An Actor interprets his/her lines in order.
+- If an Actor makes a mistake during rehearsal the Director corrects the actor.
+- The Director instructs the actors on how to emotionally interpret their lines.
