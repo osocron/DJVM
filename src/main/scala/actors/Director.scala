@@ -1,33 +1,27 @@
 package actors
 
 import actors.Director.StartProduction
-import actors.Dramaturg.{CreatePlay, PlayFinished}
-import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import actors.Dramaturg._
+import akka.actor.{Actor, ActorLogging, Props}
 
 class Director extends Actor with ActorLogging {
-
-  var dramaturg: ActorRef = _
 
   override def receive: Receive = {
     case StartProduction =>
       log.debug("Starting the magnificent production...")
-      dramaturg = context.actorOf(Dramaturg.props())
+      val dramaturg = context.actorOf(Dramaturg.props(100))
       log.debug("Telling our dramaturg to start creating a play...")
       dramaturg ! CreatePlay
     case PlayFinished(play) =>
-      println(play)
+      log.debug(s"I received a complete play!")
   }
 
 }
 
 object Director {
-
   def props(): Props = Props(new Director)
 
-  trait DirectorEvents
-  case object ProductionStarted extends DirectorEvents
-
-  trait DirectorCommands
-  case object StartProduction extends DirectorCommands
-
+  // Protocol
+  case object ProductionStarted
+  case object StartProduction
 }
