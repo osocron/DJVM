@@ -20,7 +20,7 @@ class Dramaturg(sceneNumber: Int) extends Actor with ActorLogging {
         val writer  = context.actorOf(Writer.props(100, 100))
         writer ! WriteScene(i)
       }
-<
+
     case SceneWritten(scene) =>
       // We got a scene!
       scenes = scenes :+ scene
