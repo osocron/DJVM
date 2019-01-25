@@ -22,8 +22,13 @@ class Writer(numberOfScenes: Int, numberOfLines: Int) extends Actor with ActorLo
     case WriteDialog(dialogId, sceneId) =>
       context.parent ! DialogWritten(
         Dialog(
-          (for (i <- 1 to numberOfLines)
-            yield Line(s"Line with id $i, dialog id $dialogId and scene id: $sceneId written!", i, dialogId, sceneId)).toList,
+          (for {
+            i <- 1 to numberOfLines
+          } yield Line(
+            s"Line with id $i, dialog id $dialogId and scene id: $sceneId written!",
+            i,
+            dialogId,
+            sceneId)).toList,
           dialogId,
           sceneId))
 
@@ -32,7 +37,7 @@ class Writer(numberOfScenes: Int, numberOfLines: Int) extends Actor with ActorLo
       lines = lines :+ line
       // When all lines are collected, send the result to the parent
       if (lines.size == numberOfLines) {
-        context.parent ! DialogWritten(Dialog(lines, line.dialogId, line.sceneId))
+        context.parent ! DialogWritten(Dialog(lines.sortBy(l => l.lineId), line.dialogId, line.sceneId))
       }
 
     // One of the writers finished a dialog
@@ -49,10 +54,13 @@ object Writer {
   def props(numberOfScenes: Int, numberOfLines: Int): Props = Props(new Writer(numberOfScenes, numberOfLines))
 
   // Protocol
-  case class LineWritten(line: Line)
-  case class DialogWritten(dialog: Dialog)
-  case class SceneWritten(scene: Scene)
   case class WriteLine(lineId: Long, dialogId: Long, sceneId: Long)
   case class WriteDialog(dialogId: Long, sceneId: Long)
   case class WriteScene(sceneId: Long)
+  case class LineWritten(line: Line)
+  case class DialogWritten(dialog: Dialog)
+  case class SceneWritten(scene: Scene)
+
+  // Errors
+  case class DialogCorruptedException(msg: String) extends Exception
 }
